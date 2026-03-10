@@ -1,4 +1,4 @@
-import "./MyOrders.css";
+import "./myorders.css";
 import soap from "../assets/soap.jpg";
 import accessory from "../assets/accessory.jpg";
 import birthday from "../assets/birthday.jpg"
