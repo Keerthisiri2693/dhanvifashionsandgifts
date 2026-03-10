@@ -11,6 +11,11 @@ margin:0;
 font-family:"Poppins", sans-serif;
 }
 
+img{
+max-width:100%;
+height:auto;
+}
+
 /* PAGE BACKGROUND */
 
 .profile-dashboard{
@@ -122,7 +127,9 @@ cursor:pointer;
 font-weight:500;
 }
 
-.edit-btn:hover
+.edit-btn:hover{
+background:#ff3355;
+}
 
 .profile-buttons{
 display:flex;
@@ -142,7 +149,9 @@ background:#ff4d6d;
 color:white;
 }
 
-.profile-buttons button:first-child:hover
+.profile-buttons button:first-child:hover{
+background:#ff3355;
+}
 
 .cancel-btn{
 background:#eee;
@@ -212,7 +221,9 @@ font-weight:500;
 margin-top:10px;
 }
 
-.add-address-btn:hover
+.add-address-btn:hover{
+background:#ff3355;
+}
 
 .delete-btn{
 background:#ff4d4d;
@@ -224,10 +235,12 @@ cursor:pointer;
 font-weight:500;
 }
 
-.delete-btn:hover
+.delete-btn:hover{
+background:#ff2a2a;
+}
 
 .address-form{
-margin: top 40px;
+margin-top:40px;
 background:white;
 padding:20px;
 border-radius:12px;
@@ -236,11 +249,10 @@ max-width:350px;
 display:flex;
 flex-direction:column;
 gap:10px;
-
 }
 
 .address-form input{
-    margin-top: 20px;
+margin-top:10px;
 padding:10px;
 border:1px solid #ddd;
 border-radius:6px;
@@ -265,7 +277,9 @@ background:#ff4d6d;
 color:white;
 }
 
-.form-buttons button:first-child:hover
+.form-buttons button:first-child:hover{
+background:#ff3355;
+}
 
 /* WISHLIST */
 
@@ -315,7 +329,9 @@ border-radius:6px;
 cursor:pointer;
 }
 
-.add-cart-btn:hover
+.add-cart-btn:hover{
+background:#ff3355;
+}
 
 .remove-btn{
 flex:1;
@@ -326,26 +342,8 @@ border-radius:6px;
 cursor:pointer;
 }
 
-.remove-btn:hover
-
-.cancel-btn{
-flex:1;
-padding:9px;
-border:none;
-background:#eee;
-border-radius:6px;
-cursor:pointer;
-}
-
-.delete-btn{
-margin-top:10px;
-padding:10px 18px;
-border:none;
-background:#eee;
-color:white;
-border-radius:8px;
-cursor:pointer;
-font-weight:500;
+.remove-btn:hover{
+background:#ddd;
 }
 
 /* PASSWORD */
@@ -376,4 +374,71 @@ border-radius:8px;
 cursor:pointer;
 }
 
-.password-form button:hover
+.password-form button:hover{
+background:#ff3355;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width:900px){
+
+.profile-dashboard{
+flex-direction:column;
+padding:25px;
+gap:20px;
+}
+
+.profile-sidebar{
+width:100%;
+}
+
+.profile-card{
+flex-direction:column;
+text-align:center;
+}
+
+.profile-info input{
+width:100%;
+}
+
+.order-item{
+flex-direction:column;
+align-items:flex-start;
+gap:8px;
+}
+
+.wishlist-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media (max-width:500px){
+
+.profile-dashboard{
+padding:15px;
+}
+
+.profile-sidebar h3{
+font-size:18px;
+}
+
+.profile-card img{
+width:90px;
+height:90px;
+}
+
+.wishlist-grid{
+grid-template-columns:1fr;
+}
+
+.profile-buttons{
+flex-direction:column;
+width:100%;
+}
+
+.profile-buttons button{
+width:100%;
+}
+
+}
