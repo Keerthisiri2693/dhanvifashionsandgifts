@@ -10,11 +10,25 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+/* CHECK LOGIN STATUS */
+
 useEffect(() => {
+
+const checkLogin = () => {
 const user = localStorage.getItem("user");
-if (user) {
-setIsLoggedIn(true);
-}
+setIsLoggedIn(!!user);
+};
+
+checkLogin();
+
+/* listen for login/logout changes */
+
+window.addEventListener("storage", checkLogin);
+
+return () => {
+window.removeEventListener("storage", checkLogin);
+};
+
 }, []);
 
 const closeMenu = () => {
@@ -44,10 +58,9 @@ loading="lazy"
 className="menu-btn"
 onClick={() => setMenuOpen(!menuOpen)}
 aria-label="Toggle menu"
-
 >
-
-☰ </button>
+☰
+</button>
 
 {/* NAV LINKS */}
 
@@ -101,7 +114,8 @@ Login
 
 🛒
 
-{totalItems > 0 && ( <span className="cart-count">{totalItems}</span>
+{totalItems > 0 && (
+<span className="cart-count">{totalItems}</span>
 )}
 
 </Link>

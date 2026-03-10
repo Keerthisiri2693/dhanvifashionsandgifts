@@ -378,6 +378,20 @@ cursor:pointer;
 background:#ff3355;
 }
 
+.logout-btn{
+margin-top:20px;
+padding:14px 16px;
+border-radius:10px;
+background:#ff4d4d;
+color:white;
+cursor:pointer;
+font-weight:500;
+text-align:center;
+}
+
+.logout-btn:hover{
+background:#e63946;
+}
 /* MOBILE RESPONSIVE */
 
 @media (max-width:900px){

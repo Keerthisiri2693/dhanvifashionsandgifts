@@ -10,7 +10,7 @@ const [editMode, setEditMode] = useState(false);
 
 const [profile, setProfile] = useState({
 name: "Keerthana",
-email: "[keerthana@gmail.com](mailto:keerthana@gmail.com)",
+email: "keerthana@gmail.com",
 phone: "+91 9876543210"
 });
 
@@ -27,6 +27,21 @@ city: "",
 state: "",
 mobile: ""
 });
+
+/* LOGOUT */
+
+const handleLogout = () => {
+
+localStorage.removeItem("profile");
+localStorage.removeItem("addresses");
+localStorage.removeItem("favorites");
+localStorage.removeItem("user");
+
+alert("Logged out successfully");
+
+window.location.href = "/";
+
+};
 
 /* LOAD ADDRESSES */
 
@@ -226,6 +241,15 @@ onClick={() => setActive("changepassword")}
 Change Password
 </li>
 
+{/* LOGOUT */}
+
+<li
+className="logout-btn"
+onClick={handleLogout}
+>
+Logout
+</li>
+
 </ul>
 
 </div>
@@ -285,10 +309,9 @@ Save
 <button
 className="cancel-btn"
 onClick={() => setEditMode(false)}
-
 >
-
-Cancel </button>
+Cancel
+</button>
 
 </div>
 
@@ -305,10 +328,9 @@ Cancel </button>
 <button
 className="edit-btn"
 onClick={() => setEditMode(true)}
-
 >
-
-Edit Profile </button>
+Edit Profile
+</button>
 
 </>
 
@@ -368,18 +390,16 @@ Edit Profile </button>
 <button
 className="edit-btn"
 onClick={()=>editAddress(index)}
-
 >
-
-Edit </button>
+Edit
+</button>
 
 <button
 className="delete-btn"
 onClick={()=>deleteAddress(index)}
-
 >
-
-Delete </button>
+Delete
+</button>
 
 </div>
 
@@ -390,74 +410,9 @@ Delete </button>
 <button
 className="add-address-btn"
 onClick={openAddAddress}
-
 >
-
-Add New Address </button>
-
-{showForm && (
-
-<div className="address-form">
-
-<input
-type="text"
-name="name"
-placeholder="Name"
-value={addressForm.name}
-onChange={handleAddressChange}
-/>
-
-<input
-type="text"
-name="mobile"
-placeholder="Mobile Number"
-value={addressForm.mobile}
-onChange={handleAddressChange}
-/>
-
-<input
-type="text"
-name="street"
-placeholder="Street Address"
-value={addressForm.street}
-onChange={handleAddressChange}
-/>
-
-<input
-type="text"
-name="city"
-placeholder="City"
-value={addressForm.city}
-onChange={handleAddressChange}
-/>
-
-<input
-type="text"
-name="state"
-placeholder="State"
-value={addressForm.state}
-onChange={handleAddressChange}
-/>
-
-<div className="form-buttons">
-
-<button onClick={saveAddress}>
-Save
+Add New Address
 </button>
-
-<button
-className="cancel-btn"
-onClick={cancelAddress}
-
->
-
-Cancel </button>
-
-</div>
-
-</div>
-
-)}
 
 </div>
 
@@ -474,9 +429,7 @@ Cancel </button>
 <div className="wishlist-grid">
 
 {wishlistItems.length === 0 ? (
-
 <p>No items in wishlist</p>
-
 ) : (
 
 wishlistItems.map(item => (
@@ -498,10 +451,9 @@ Add to Cart
 <button
 className="remove-btn"
 onClick={()=>removeFromWishlist(item.id)}
-
 >
-
-Remove </button>
+Remove
+</button>
 
 </div>
 
@@ -512,32 +464,6 @@ Remove </button>
 )}
 
 </div>
-
-</div>
-
-)}
-
-{/* PASSWORD */}
-
-{active === "changepassword" && (
-
-<div className="settings-section">
-
-<h2>Change Password</h2>
-
-<form className="password-form">
-
-<input type="password" placeholder="Current Password"/>
-
-<input type="password" placeholder="New Password"/>
-
-<input type="password" placeholder="Confirm Password"/>
-
-<button type="submit">
-Change Password
-</button>
-
-</form>
 
 </div>
 
