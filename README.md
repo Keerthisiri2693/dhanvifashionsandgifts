@@ -1,16 +1,134 @@
-# React + Vite
+# Dhanvi Fashions & Gifts 🎁
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **React Ecommerce Website** for selling return gifts, fashion accessories, soaps, and gift items.
 
-Currently, two official plugins are available:
+This project includes product browsing, cart management, user authentication, wishlist, and order management.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* 🛍️ Product Shop
+* ❤️ Wishlist
+* 🛒 Shopping Cart
+* 👤 User Profile Dashboard
+* 🔐 Login & Register System
+* 📦 Order History
+* 📍 Address Management
+* 🔎 Product Search
+* 📱 Responsive Design
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🖥️ Tech Stack
+
+Frontend:
+
+* React.js
+* React Router
+* CSS
+
+Storage:
+
+* LocalStorage
+
+Tools:
+
+* Git
+* GitHub
+
+---
+
+## 📂 Project Structure
+
+```
+src
+ ├── components
+ │    └── Navbar
+ │
+ ├── pages
+ │    ├── Home
+ │    ├── Shop
+ │    ├── Cart
+ │    ├── Checkout
+ │    ├── Profile
+ │    ├── Login
+ │    ├── Register
+ │    ├── Orders
+ │    └── Contact
+ │
+ ├── assets
+ │
+ └── App.js
+```
+
+---
+
+## ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Keerthisiri2693/dhanvifashionsandgifts.git
+```
+
+Go to the project folder:
+
+```bash
+cd dhanvifashionsandgifts
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm start
+```
+
+The app will run on:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 📸 Screens
+
+Example pages:
+
+* Home Page
+* Product Shop
+* Cart Page
+* Profile Dashboard
+* Login / Register
+
+---
+
+## 🌐 Future Improvements
+
+* Payment Gateway Integration
+* Backend API with Node.js
+* Admin Dashboard
+* Order Tracking Timeline
+* Product Reviews
+
+---
+
+## 👩‍💻 Author
+
+**Keerthana**
+
+GitHub:
+https://github.com/Keerthisiri2693
+
+---
+
+## ⭐ Support
+
+If you like this project, please **star the repository** ⭐
