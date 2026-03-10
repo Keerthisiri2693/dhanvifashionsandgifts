@@ -1,0 +1,152 @@
+.cart-page{
+  padding:60px 20px;
+  max-width:1100px;
+  margin:auto;
+  background:#fafafa;
+}
+
+/* CART LIST */
+
+.cart-container{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+/* CART ITEM CARD */
+
+.cart-item{
+  display:flex;
+  gap:20px;
+  align-items:center;
+  background:#fff;
+  padding:18px;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  transition:all 0.3s ease;
+}
+
+.cart-item:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* PRODUCT IMAGE */
+
+.cart-item img{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+/* DETAILS */
+
+.cart-details{
+  flex:1;
+}
+
+.cart-details h3{
+  margin:0;
+  font-size:18px;
+  color:#333;
+}
+
+.cart-details p{
+  margin-top:5px;
+  font-weight:600;
+  color:#ff4d6d;
+}
+
+/* QUANTITY */
+
+.quantity{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:12px 0;
+}
+
+.quantity button{
+  width:32px;
+  height:32px;
+  border:none;
+  background:#ff4d6d;
+  color:#fff;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.quantity span{
+  font-size:16px;
+  font-weight:500;
+}
+
+/* REMOVE BUTTON */
+
+.remove-btn{
+  background:#f1f1f1;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.remove-btn:hover{
+  background:#e0e0e0;
+}
+
+/* TOTAL SECTION */
+
+.cart-total{
+  margin-top:30px;
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  text-align:right;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+.cart-total h2{
+  margin-bottom:10px;
+  color:#333;
+}
+
+/* CHECKOUT BUTTON */
+
+.checkout-btn{
+  padding:12px 25px;
+  background:#ff4d6d;
+  color:white;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.checkout-btn:hover{
+  background:#e63956;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .cart-item{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .cart-item img{
+    width:100px;
+    height:100px;
+  }
+
+  .cart-total{
+    text-align:center;
+  }
+
+}

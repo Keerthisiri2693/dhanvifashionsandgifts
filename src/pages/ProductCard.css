@@ -1,0 +1,92 @@
+.product-card{
+  position: relative;
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+.product-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* Product Image */
+
+.product-card img{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Product Name */
+
+.product-card h3{
+  font-size: 16px;
+  margin: 8px 0;
+  font-weight: 600;
+}
+
+/* Price */
+
+.product-card p{
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff4d6d;
+  margin-bottom: 12px;
+}
+
+/* Add to Cart Button */
+
+.product-card button{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.product-card button:hover{
+  background: #e63b5a;
+}
+
+/* Favorite Heart */
+
+.favorite{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+
+  background: white;
+  padding: 6px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* when product is favorite */
+.favorite.active{
+  color: red;
+  transform: scale(1.15);
+}
+
+/* hover effect */
+.favorite:hover{
+  transform: scale(1.15);
+}

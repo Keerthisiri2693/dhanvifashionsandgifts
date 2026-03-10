@@ -1,0 +1,47 @@
+.track-page{
+min-height:80vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#f4f6fb;
+padding:40px;
+}
+
+.track-card{
+background:white;
+padding:40px;
+border-radius:12px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+width:400px;
+text-align:center;
+}
+
+.track-card h2{
+margin-bottom:20px;
+}
+
+.track-card input{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+.track-card button{
+width:100%;
+padding:12px;
+background:#ff4d6d;
+border:none;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+.order-status{
+margin-top:20px;
+text-align:left;
+background:#fafafa;
+padding:15px;
+border-radius:8px;
+}

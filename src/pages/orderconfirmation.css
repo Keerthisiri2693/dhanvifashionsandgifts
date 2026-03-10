@@ -1,0 +1,125 @@
+.order-confirm-page{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:80vh;
+background:#f6f7fb;
+padding:20px;
+}
+
+/* CARD */
+
+.order-card{
+background:#fff;
+padding:45px 35px;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+max-width:520px;
+width:100%;
+text-align:center;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:18px;
+}
+
+/* SUCCESS ICON */
+
+.success-icon{
+font-size:60px;
+}
+
+/* SUCCESS TEXT */
+
+.success-section h1{
+font-size:26px;
+font-weight:600;
+color:#222;
+margin:0;
+}
+
+/* ORDER INFO */
+
+.order-info{
+color:#555;
+font-size:15px;
+}
+
+.order-id{
+color:#ff4d6d;
+font-weight:600;
+margin:6px 0;
+}
+
+.order-message{
+font-size:14px;
+color:#666;
+}
+
+/* BUTTONS */
+
+.order-buttons{
+margin-top:15px;
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.home-btn{
+padding:11px 20px;
+border:none;
+background:#ff4d6d;
+color:#fff;
+border-radius:8px;
+cursor:pointer;
+font-weight:500;
+transition:0.2s;
+}
+
+.home-btn:hover{
+background:#e63950;
+}
+
+.orders-btn{
+padding:11px 20px;
+border:none;
+background:#333;
+color:#fff;
+border-radius:8px;
+cursor:pointer;
+font-weight:500;
+transition:0.2s;
+}
+
+.orders-btn:hover{
+background:#222;
+}
+
+/* MOBILE */
+
+@media (max-width:600px){
+
+.order-card{
+padding:35px 20px;
+}
+
+.success-icon{
+font-size:50px;
+}
+
+.success-section h1{
+font-size:22px;
+}
+
+.order-buttons{
+flex-direction:column;
+width:100%;
+}
+
+.home-btn,
+.orders-btn{
+width:100%;
+}
+
+}

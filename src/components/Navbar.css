@@ -1,0 +1,196 @@
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #eee;
+  padding:10px 30px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.nav-container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+/* LOGO */
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:#333;
+  font-weight:bold;
+  font-size:18px;
+}
+
+.logo img{
+  width:160px;
+}
+
+/* NAV LINKS */
+
+.nav-links{
+  display:flex;
+  gap:25px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+  font-weight:500;
+  transition:0.2s;
+}
+
+.nav-links a:hover{
+  color:#ff4d6d;
+}
+
+/* RIGHT SIDE */
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+/* SEARCH */
+
+.search-box{
+  display:flex;
+  border:1px solid #ddd;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.search-box input{
+  border:none;
+  padding:6px 10px;
+  outline:none;
+}
+
+.search-box button{
+  border:none;
+  background:#ff4d6d;
+  color:#fff;
+  padding:6px 10px;
+  cursor:pointer;
+}
+
+/* PROFILE */
+
+.profile-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#f5f5f5;
+  text-decoration:none;
+  font-size:18px;
+  margin-right:10px;
+  transition:0.2s;
+}
+
+.profile-btn:hover{
+  background:#ff4d6d;
+  color:white;
+}
+
+/* CART */
+
+.cart-btn{
+  position:relative;
+  font-weight:600;
+  text-decoration:none;
+  color:#333;
+}
+
+.cart-count{
+  position:absolute;
+  top:-6px;
+  right:-10px;
+  background:#ff3b3b;
+  color:white;
+  font-size:11px;
+  padding:3px 6px;
+  border-radius:50%;
+  font-weight:600;
+}
+
+/* HAMBURGER BUTTON */
+
+.menu-btn{
+  display:none;
+  background:none;
+  border:none;
+  font-size:26px;
+  cursor:pointer;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width:768px){
+
+.nav-container{
+  flex-wrap:wrap;
+}
+
+.menu-btn{
+  display:block;
+}
+
+/* hide menu initially */
+
+.nav-links{
+  display:none;
+  flex-direction:column;
+  width:100%;
+  background:white;
+  padding:10px 0;
+  border-top:1px solid #eee;
+}
+
+/* show when active */
+
+.nav-links.active{
+  display:flex;
+}
+
+.nav-links a{
+  padding:10px 20px;
+  border-bottom:1px solid #eee;
+}
+
+/* smaller logo */
+
+.logo img{
+  width:120px;
+}
+
+/* hide search on mobile */
+
+.search-box{
+  display:none;
+}
+
+.nav-right{
+  gap:10px;
+}
+
+}
+
+.login-btn{
+background:#ff4d6d;
+color:white;
+padding:8px 16px;
+border-radius:8px;
+text-decoration:none;
+font-weight:500;
+}
+
+.login-btn:hover{
+background:#e63b5a;
+}
