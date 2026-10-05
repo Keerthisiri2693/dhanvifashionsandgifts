@@ -1,125 +1,705 @@
-.order-confirm-page{
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:80vh;
-background:#f6f7fb;
-padding:20px;
+/* =====================================================
+   ORDER CONFIRMATION
+===================================================== */
+
+.order-confirm-page {
+  width: 100%;
+  min-height: calc(100vh - 90px);
+
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 55px 20px 80px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff8fa 0%,
+      #fffafb 45%,
+      #f8fafc 100%
+    );
+
+  overflow-x: hidden;
 }
 
-/* CARD */
 
-.order-card{
-background:#fff;
-padding:45px 35px;
-border-radius:14px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-max-width:520px;
-width:100%;
-text-align:center;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:18px;
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.order-confirm-page .order-card {
+  width: 100%;
+  max-width: 680px;
+
+  box-sizing: border-box;
+
+  margin: 0 auto;
+
+  padding: 42px;
+
+  background: #ffffff;
+
+  border: 1px solid #f1d5dc;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.08),
+    0 4px 15px rgba(225, 29, 72, 0.04);
+
+  text-align: center;
+
+  overflow: hidden;
+
+  display: block;
 }
 
-/* SUCCESS ICON */
 
-.success-icon{
-font-size:60px;
+/* =====================================================
+   SUCCESS ICON
+===================================================== */
+
+.order-confirm-page .success-icon {
+  width: 82px;
+  height: 82px;
+
+  margin: 0 auto 22px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #fff1f2;
+
+  border: 8px solid #fff8f9;
+
+  font-size: 40px;
+
+  line-height: 1;
+
+  box-shadow:
+    0 10px 30px rgba(225, 29, 72, 0.12);
 }
 
-/* SUCCESS TEXT */
 
-.success-section h1{
-font-size:26px;
-font-weight:600;
-color:#222;
-margin:0;
+/* =====================================================
+   HEADING
+===================================================== */
+
+.order-confirm-page .order-card h1 {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 30px;
+
+  line-height: 1.3;
+
+  font-weight: 800;
+
+  letter-spacing: -0.5px;
+
+  overflow-wrap: anywhere;
 }
 
-/* ORDER INFO */
 
-.order-info{
-color:#555;
-font-size:15px;
+/* =====================================================
+   THANK YOU
+===================================================== */
+
+.order-confirm-page .thank-you-text {
+  margin: 14px auto 0;
+
+  max-width: 520px;
+
+  color: #64748b;
+
+  font-size: 15px;
+
+  line-height: 1.6;
 }
 
-.order-id{
-color:#ff4d6d;
-font-weight:600;
-margin:6px 0;
+
+.order-confirm-page .thank-you-text b {
+  color: #be123c;
 }
 
-.order-message{
-font-size:14px;
-color:#666;
+
+/* =====================================================
+   ORDER ID
+===================================================== */
+
+.order-confirm-page .order-id-section {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  margin: 28px 0 22px;
+
+  padding: 20px;
+
+  background: linear-gradient(
+    135deg,
+    #fff7f8,
+    #fff1f2
+  );
+
+  border: 1px solid #fecdd3;
+
+  border-radius: 16px;
+
+  text-align: center;
 }
 
-/* BUTTONS */
 
-.order-buttons{
-margin-top:15px;
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-justify-content:center;
+.order-confirm-page .order-label {
+  margin: 0 0 8px;
+
+  color: #64748b;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
 }
 
-.home-btn{
-padding:11px 20px;
-border:none;
-background:#ff4d6d;
-color:#fff;
-border-radius:8px;
-cursor:pointer;
-font-weight:500;
-transition:0.2s;
+
+.order-confirm-page .order-id {
+  margin: 0;
+
+  color: #e11d48;
+
+  font-size: 24px;
+
+  font-weight: 800;
+
+  line-height: 1.4;
+
+  letter-spacing: 0.3px;
+
+  overflow-wrap: anywhere;
+
+  word-break: break-word;
 }
 
-.home-btn:hover{
-background:#e63950;
+
+/* =====================================================
+   ORDER INFORMATION
+===================================================== */
+
+.order-confirm-page .order-info {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  margin: 0;
+
+  padding: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  text-align: left;
+
+  display: block;
 }
 
-.orders-btn{
-padding:11px 20px;
-border:none;
-background:#333;
-color:#fff;
-border-radius:8px;
-cursor:pointer;
-font-weight:500;
-transition:0.2s;
+
+.order-confirm-page .order-info-row {
+  width: 100%;
+
+  min-height: 54px;
+
+  box-sizing: border-box;
+
+  padding: 13px 17px;
+
+  display: flex;
+
+  flex-direction: row;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  border-bottom: 1px solid #f1f5f9;
 }
 
-.orders-btn:hover{
-background:#222;
+
+.order-confirm-page .order-info-row:last-child {
+  border-bottom: none;
 }
 
-/* MOBILE */
 
-@media (max-width:600px){
+.order-confirm-page .order-info-row span {
+  color: #64748b;
 
-.order-card{
-padding:35px 20px;
+  font-size: 14px;
+
+  font-weight: 500;
+
+  flex: 1;
+
+  min-width: 0;
 }
 
-.success-icon{
-font-size:50px;
+
+.order-confirm-page .order-info-row strong {
+  color: #1f2937;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  text-align: right;
+
+  flex-shrink: 0;
+
+  max-width: 60%;
+
+  overflow-wrap: anywhere;
 }
 
-.success-section h1{
-font-size:22px;
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.order-confirm-page .status-success {
+  color: #15803d !important;
+
+  background: #f0fdf4;
+
+  padding: 5px 11px;
+
+  border-radius: 20px;
+
+  font-size: 12px !important;
+
+  text-transform: capitalize;
 }
 
-.order-buttons{
-flex-direction:column;
-width:100%;
+
+/* =====================================================
+   PRICE SUMMARY
+===================================================== */
+
+.order-confirm-page .order-price-summary {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  margin-top: 20px;
+
+  padding: 17px 18px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 16px;
+
+  text-align: left;
+
+  display: block;
 }
 
-.home-btn,
-.orders-btn{
-width:100%;
+
+/* =====================================================
+   PRICE ROW
+===================================================== */
+
+.order-confirm-page .price-row {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  min-height: 36px;
+
+  padding: 6px 0;
+
+  display: flex;
+
+  flex-direction: row;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  color: #64748b;
+
+  font-size: 14px;
 }
+
+
+.order-confirm-page .price-row strong {
+  color: #1f2937;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+
+.order-confirm-page .price-row .free {
+  color: #16a34a;
+}
+
+
+/* =====================================================
+   TOTAL
+===================================================== */
+
+.order-confirm-page .price-row.total-row {
+  margin-top: 8px;
+
+  padding-top: 16px;
+
+  border-top: 1px dashed #cbd5e1;
+
+  color: #111827;
+
+  font-size: 17px;
+
+  font-weight: 700;
+}
+
+
+.order-confirm-page .price-row.total-row strong {
+  color: #e11d48;
+
+  font-size: 23px;
+
+  font-weight: 800;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.order-confirm-page .order-message {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  margin: 20px 0 0;
+
+  padding: 15px 16px;
+
+  display: flex;
+
+  flex-direction: row;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  text-align: left;
+}
+
+
+.order-confirm-page .order-message span {
+  flex-shrink: 0;
+
+  font-size: 20px;
+}
+
+
+.order-confirm-page .order-message p {
+  margin: 0;
+
+  min-width: 0;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.order-confirm-page .order-buttons {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  margin-top: 26px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+}
+
+
+.order-confirm-page .order-buttons a {
+  width: 100%;
+
+  min-width: 0;
+
+  display: block;
+
+  text-decoration: none;
+}
+
+
+.order-confirm-page .order-buttons button {
+  width: 100%;
+
+  min-height: 50px;
+
+  box-sizing: border-box;
+
+  padding: 0 16px;
+
+  border-radius: 11px;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+/* =====================================================
+   CONTINUE SHOPPING
+===================================================== */
+
+.order-confirm-page .home-btn {
+  color: #ffffff;
+
+  background: #e11d48;
+
+  border: 1px solid #e11d48;
+}
+
+
+.order-confirm-page .home-btn:hover {
+  background: #be123c;
+
+  border-color: #be123c;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(225, 29, 72, 0.22);
+}
+
+
+/* =====================================================
+   VIEW ORDERS
+===================================================== */
+
+.order-confirm-page .orders-btn {
+  color: #334155;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+}
+
+
+.order-confirm-page .orders-btn:hover {
+  background: #f8fafc;
+
+  border-color: #cbd5e1;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 16px rgba(15, 23, 42, 0.07);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .order-confirm-page {
+    min-height: calc(100vh - 70px);
+
+    padding: 25px 12px 45px;
+  }
+
+
+  .order-confirm-page .order-card {
+    max-width: 100%;
+
+    padding: 28px 18px 24px;
+
+    border-radius: 20px;
+  }
+
+
+  .order-confirm-page .success-icon {
+    width: 68px;
+    height: 68px;
+
+    margin-bottom: 18px;
+
+    border-width: 6px;
+
+    font-size: 32px;
+  }
+
+
+  .order-confirm-page .order-card h1 {
+    font-size: 23px;
+
+    line-height: 1.3;
+  }
+
+
+  .order-confirm-page .thank-you-text {
+    font-size: 14px;
+
+    line-height: 1.6;
+  }
+
+
+  .order-confirm-page .order-id-section {
+    margin-top: 22px;
+
+    padding: 17px 12px;
+  }
+
+
+  .order-confirm-page .order-id {
+    font-size: 19px;
+
+    line-height: 1.35;
+  }
+
+
+  .order-confirm-page .order-info-row {
+    min-height: 52px;
+
+    padding: 11px 13px;
+  }
+
+
+  .order-confirm-page .order-info-row span,
+  .order-confirm-page .order-info-row strong {
+    font-size: 13px;
+  }
+
+
+  .order-confirm-page .order-info-row strong {
+    max-width: 55%;
+  }
+
+
+  .order-confirm-page .order-price-summary {
+    padding: 14px;
+  }
+
+
+  .order-confirm-page .price-row {
+    font-size: 13px;
+  }
+
+
+  .order-confirm-page .price-row.total-row {
+    font-size: 16px;
+  }
+
+
+  .order-confirm-page .price-row.total-row strong {
+    font-size: 20px;
+  }
+
+
+  .order-confirm-page .order-message {
+    justify-content: flex-start;
+
+    font-size: 12px;
+  }
+
+
+  .order-confirm-page .order-buttons {
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+
+    margin-top: 22px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .order-confirm-page {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+
+  .order-confirm-page .order-card {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+
+  .order-confirm-page .order-card h1 {
+    font-size: 21px;
+  }
+
+
+  .order-confirm-page .order-id {
+    font-size: 17px;
+  }
+
+
+  .order-confirm-page .order-info-row {
+    gap: 8px;
+  }
 
 }

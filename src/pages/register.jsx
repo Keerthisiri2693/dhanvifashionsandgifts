@@ -24,21 +24,44 @@ setForm({
 
 };
 
-const handleRegister = (e) => {
+const handleRegister = async (e) => {
+  e.preventDefault();
 
+  if (!form.name || !form.email || !form.password) {
+    alert("Please fill all fields");
+    return;
+  }
 
-e.preventDefault();
+  try {
+    const response = await fetch(
+      "https://dhanvifashionbackend.onrender.com/api/auth/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      }
+    );
 
-if(!form.name || !form.email || !form.password){
-  alert("Please fill all fields");
-  return;
-}
+    const data = await response.json();
 
-loginUser(form);
+    if (!response.ok) {
+      alert(data.message || "Registration failed");
+      return;
+    }
 
-navigate("/profile");
+    alert("Registration successful!");
 
+    // Go to login after registration
+    navigate("/login");
+
+  } catch (error) {
+    console.error("Registration Error:", error);
+    alert("Unable to connect to server");
+  }
 };
+
 
 return (
 

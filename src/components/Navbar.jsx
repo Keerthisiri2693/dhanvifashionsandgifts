@@ -1,133 +1,448 @@
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import {
+  Link,
+  NavLink,
+  useNavigate,
+} from "react-router-dom";
+
+import { useEffect, useState } from "react";
+
 import "./Navbar.css";
-import shoplogo from "../assets/dhanvifashionlogo.png";
 
-function Navbar({ cart }) {
+import logo from "../assets/logo.png";
 
-const [menuOpen, setMenuOpen] = useState(false);
-const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Navbar({ cart = [] }) {
 
-const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const navigate = useNavigate();
 
-/* CHECK LOGIN STATUS */
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
-useEffect(() => {
+  // =====================================================
+  // CHECK LOGIN
+  // =====================================================
 
-const checkLogin = () => {
-const user = localStorage.getItem("user");
-setIsLoggedIn(!!user);
-};
+  useEffect(() => {
 
-checkLogin();
+    const checkLogin = () => {
 
-/* listen for login/logout changes */
+      const token =
+        localStorage.getItem("token");
 
-window.addEventListener("storage", checkLogin);
+      const userId =
+        localStorage.getItem("userId");
 
-return () => {
-window.removeEventListener("storage", checkLogin);
-};
+      const savedUser =
+        localStorage.getItem("user");
 
-}, []);
+      const validUserId =
+        userId &&
+        userId !== "1" &&
+        userId !== "null" &&
+        userId !== "undefined";
 
-const closeMenu = () => {
-setMenuOpen(false);
-};
+      const isLoggedIn =
+        Boolean(token) &&
+        Boolean(validUserId);
 
-return (
+      console.log("=================================");
+      console.log("🔐 NAVBAR LOGIN CHECK");
+      console.log("🔑 Token:", Boolean(token));
+      console.log("👤 User ID:", userId);
+      console.log("✅ Logged In:", isLoggedIn);
+      console.log("=================================");
 
-<header className="navbar">
+      setLoggedIn(isLoggedIn);
 
-<div className="nav-container">
+      if (isLoggedIn && savedUser) {
 
-{/* LOGO */}
+        try {
 
-<Link to="/" className="logo" onClick={closeMenu}>
-<img
-src={shoplogo}
-alt="Dhanvi Fashion & Gifts Logo"
-loading="lazy"
-/>
-<span>Dhanvi Fashion & Gifts</span>
-</Link>
+          const parsedUser =
+            JSON.parse(savedUser);
 
-{/* MOBILE MENU */}
+          setUser(parsedUser);
 
-<button
-className="menu-btn"
-onClick={() => setMenuOpen(!menuOpen)}
-aria-label="Toggle menu"
->
-☰
-</button>
+        } catch (error) {
 
-{/* NAV LINKS */}
+          console.error(
+            "❌ Invalid user data:",
+            error
+          );
 
-<nav className={`nav-links ${menuOpen ? "active" : ""}`}>
+          setUser(null);
+        }
 
-<Link to="/" onClick={closeMenu}>Home</Link>
-<Link to="/shop" onClick={closeMenu}>Shop</Link>
-<Link to="/categories" onClick={closeMenu}>Categories</Link>
-<Link to="/myorders" onClick={closeMenu}>My Orders</Link>
-<Link to="/about" onClick={closeMenu}>About</Link>
-<Link to="/contact" onClick={closeMenu}>Contact</Link>
+      } else {
 
-</nav>
+        setUser(null);
+      }
+    };
 
-{/* RIGHT SIDE */}
+    checkLogin();
 
-<div className="nav-right">
+    window.addEventListener(
+      "authChange",
+      checkLogin
+    );
 
-{/* SEARCH */}
+    return () => {
 
-<div className="search-box">
+      window.removeEventListener(
+        "authChange",
+        checkLogin
+      );
 
-<input
-type="text"
-placeholder="Search products..."
-/>
+    };
 
-<button type="button">🔍</button>
+  }, []);
 
-</div>
+  // =====================================================
+  // CART COUNT
+  // =====================================================
 
-{/* LOGIN / PROFILE */}
+  const cartCount = Array.isArray(cart)
+    ? cart.reduce(
+        (total, item) => {
 
-{isLoggedIn ? (
+          return (
+            total +
+            Number(item?.quantity || 1)
+          );
 
-<Link to="/profile" className="profile-btn">
-👤
-</Link>
+        },
+        0
+      )
+    : 0;
 
-) : (
+  // =====================================================
+  // CART DEBUG
+  // =====================================================
 
-<Link to="/login" className="login-btn">
-Login
-</Link>
+  useEffect(() => {
 
-)}
+    console.log("=================================");
+    console.log("🛒 NAVBAR CART UPDATED");
+    console.log("🛒 CART:", cart);
+    console.log("🛒 CART COUNT:", cartCount);
+    console.log("=================================");
 
-{/* CART */}
+  }, [cart, cartCount]);
 
-<Link to="/cart" className="cart-btn">
+  // =====================================================
+  // LOGOUT
+  // =====================================================
 
-🛒
+  const handleLogout = () => {
 
-{totalItems > 0 && (
-<span className="cart-count">{totalItems}</span>
-)}
+    console.log(
+      "🚪 LOGGING OUT"
+    );
 
-</Link>
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("user");
+    localStorage.removeItem("profile");
 
-</div>
+    setLoggedIn(false);
+    setUser(null);
 
-</div>
+    window.dispatchEvent(
+      new Event("authChange")
+    );
 
-</header>
+    navigate("/", {
+      replace: true,
+    });
 
-);
+  };
 
+  // =====================================================
+  // NAVIGATION STYLE
+  // =====================================================
+
+  const navStyle = ({ isActive }) => ({
+    textDecoration: "none",
+
+    color: isActive
+      ? "#ff4d6d"
+      : "#222",
+
+    fontWeight: isActive
+      ? "600"
+      : "500",
+  });
+
+  // =====================================================
+  // USER NAME
+  // =====================================================
+
+  const getUserName = () => {
+
+    if (user?.name) {
+      return user.name;
+    }
+
+    if (user?.email) {
+      return user.email.split("@")[0];
+    }
+
+    return "User";
+  };
+
+  // =====================================================
+  // USER INITIAL
+  // =====================================================
+
+  const getInitial = () => {
+
+    const name =
+      user?.name ||
+      user?.email ||
+      "U";
+
+    return name
+      .charAt(0)
+      .toUpperCase();
+  };
+
+  // =====================================================
+  // PROFILE PHOTO
+  // =====================================================
+
+  const getProfilePhoto = () => {
+
+    return (
+      user?.photo ||
+      user?.profilePhoto ||
+      user?.avatar ||
+      user?.image ||
+      null
+    );
+  };
+
+  // =====================================================
+  // PROFILE AVATAR
+  // =====================================================
+
+  const ProfileAvatar = () => {
+
+    const photo =
+      getProfilePhoto();
+
+    if (photo) {
+
+      return (
+        <img
+          src={photo}
+          alt="Profile"
+          className="profile-nav-avatar-image"
+          onError={(event) => {
+            event.currentTarget.style.display =
+              "none";
+          }}
+        />
+      );
+
+    }
+
+    return (
+      <span className="profile-nav-avatar">
+        {getInitial()}
+      </span>
+    );
+  };
+
+  // =====================================================
+  // UI
+  // =====================================================
+
+  return (
+    <nav className="navbar">
+
+      {/* =================================================
+          LEFT
+      ================================================= */}
+
+      <div className="navbar-left">
+
+        <div className="navbar-logo">
+
+          <Link to="/">
+
+            <img
+              src={logo}
+              alt="Dhanvi Fashion & Gifts"
+            />
+
+          </Link>
+
+        </div>
+
+        <div className="brand-name">
+
+          <Link to="/">
+            Dhanvi Fashion & Gifts
+          </Link>
+
+        </div>
+
+      </div>
+
+      {/* =================================================
+          MENU
+      ================================================= */}
+
+      <div className="navbar-menu">
+
+        <NavLink
+          to="/"
+          style={navStyle}
+        >
+          Home
+        </NavLink>
+
+        <NavLink
+          to="/shop"
+          style={navStyle}
+        >
+          Shop
+        </NavLink>
+
+        <NavLink
+          to="/categories"
+          style={navStyle}
+        >
+          Categories
+        </NavLink>
+
+        <NavLink
+          to="/myorders"
+          style={navStyle}
+        >
+          My Orders
+        </NavLink>
+
+        <NavLink
+          to="/about"
+          style={navStyle}
+        >
+          About
+        </NavLink>
+
+        <NavLink
+          to="/contact"
+          style={navStyle}
+        >
+          Contact
+        </NavLink>
+
+      </div>
+
+      {/* =================================================
+          RIGHT
+      ================================================= */}
+
+      <div className="navbar-right">
+
+        {/* SEARCH */}
+
+        <div className="search-box">
+
+          <input
+            type="text"
+            placeholder="Search products..."
+          />
+
+          <button
+            type="button"
+            aria-label="Search"
+          >
+            🔍
+          </button>
+
+        </div>
+
+        {/* =================================================
+            PROFILE / LOGIN
+        ================================================= */}
+
+        {loggedIn ? (
+
+          <div className="profile-nav-container">
+
+            <Link
+              to="/profile"
+              className="profile-nav-btn"
+              title={getUserName()}
+            >
+
+              <span className="profile-avatar-wrapper">
+
+                <ProfileAvatar />
+
+              </span>
+
+              <span className="profile-nav-text">
+
+                {getUserName()}
+
+              </span>
+
+            </Link>
+
+            <button
+              type="button"
+              className="logout-btn"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+
+          </div>
+
+        ) : (
+
+          <Link
+            to="/login"
+            className="login-btn"
+          >
+            Login
+          </Link>
+
+        )}
+
+        {/* =================================================
+            CART
+        ================================================= */}
+
+        <Link
+          to="/cart"
+          className="cart-link"
+          aria-label="Shopping cart"
+        >
+
+          <span className="cart-icon">
+            🛒
+          </span>
+
+          {/* =================================================
+              CART COUNT
+          ================================================= */}
+
+          {cartCount > 0 && (
+
+            <span className="cart-count">
+              {cartCount}
+            </span>
+
+          )}
+
+        </Link>
+
+      </div>
+
+    </nav>
+  );
 }
 
 export default Navbar;

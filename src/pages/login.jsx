@@ -1,131 +1,339 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { loginUser } from "../auth";
 import "./login.css";
 
+const API_URL = "https://dhanvifashionbackend.onrender.com/api";
+
 function Login() {
+  const navigate = useNavigate();
 
-const navigate = useNavigate();
+  // =====================================================
+  // FORM STATE
+  // =====================================================
 
-/* LOGIN STATE */
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
-const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // =====================================================
+  // LOGIN STATE
+  // =====================================================
 
-/* FORM STATE */
+  const [loading, setLoading] = useState(false);
 
-const [form, setForm] = useState({
-email: "",
-password: ""
-});
+  // =====================================================
+  // CHECK ALREADY LOGGED IN
+  // =====================================================
 
-/* CHECK IF USER ALREADY LOGGED IN */
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-useEffect(() => {
+    if (token) {
+      navigate("/profile", { replace: true });
+    }
+  }, [navigate]);
 
-const user = localStorage.getItem("user");
+  // =====================================================
+  // HANDLE INPUT CHANGE
+  // =====================================================
 
-if (user) {
-setIsLoggedIn(true);
-navigate("/profile");
-}
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-}, [navigate]);
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-/* HANDLE INPUT CHANGE */
+  // =====================================================
+  // HANDLE LOGIN
+  // =====================================================
 
-const handleChange = (e) => {
+const handleLogin = async (e) => {
+  e.preventDefault();
 
-setForm({
-...form,
-[e.target.name]: e.target.value
-});
+  const email = form.email.trim();
+  const password = form.password;
 
+  if (!email || !password) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    const response = await fetch(
+      `${API_URL}/auth/login`,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    console.log("=================================");
+    console.log("🔐 LOGIN RESPONSE");
+    console.log(data);
+    console.log("=================================");
+
+    // =================================================
+    // LOGIN FAILED
+    // =================================================
+
+    if (!response.ok) {
+      alert(
+        data.message ||
+          "Invalid email or password"
+      );
+
+      return;
+    }
+
+    // =================================================
+    // CHECK TOKEN
+    // =================================================
+
+    if (!data.token) {
+      console.error(
+        "❌ Backend did not return token:",
+        data
+      );
+
+      alert(
+        "Login failed. Server did not return a token."
+      );
+
+      return;
+    }
+
+    // =================================================
+    // CHECK USER
+    // =================================================
+
+    if (!data.user) {
+      console.error(
+        "❌ Backend did not return user:",
+        data
+      );
+
+      alert(
+        "Login failed. Server did not return user information."
+      );
+
+      return;
+    }
+
+    // =================================================
+    // GET REAL USER ID
+    // =================================================
+
+    const userId =
+      data.user._id ||
+      data.user.id;
+
+    if (!userId) {
+      console.error(
+        "❌ User ID missing:",
+        data.user
+      );
+
+      alert(
+        "Login failed. User ID was not returned by server."
+      );
+
+      return;
+    }
+
+    // =================================================
+    // SAVE TOKEN
+    // =================================================
+
+    localStorage.setItem(
+      "token",
+      data.token
+    );
+
+    // =================================================
+    // SAVE REAL USER ID
+    // =================================================
+
+    localStorage.setItem(
+      "userId",
+      String(userId)
+    );
+
+    // =================================================
+    // SAVE USER
+    // =================================================
+
+    localStorage.setItem(
+      "user",
+      JSON.stringify(data.user)
+    );
+
+    // =================================================
+    // SAVE PROFILE
+    // =================================================
+
+    localStorage.setItem(
+      "profile",
+      JSON.stringify({
+        id: userId,
+
+        name:
+          data.user.name || "",
+
+        email:
+          data.user.email || "",
+
+        phone:
+          data.user.phone || "",
+
+        photo:
+          data.user.photo ||
+          data.user.profilePhoto ||
+          "",
+      })
+    );
+
+    // =================================================
+    // DEBUG
+    // =================================================
+
+    console.log("=================================");
+    console.log("✅ LOGIN SUCCESS");
+    console.log("👤 USER ID:", userId);
+    console.log("🔑 TOKEN EXISTS:", true);
+    console.log("=================================");
+
+    // =================================================
+    // UPDATE NAVBAR
+    // =================================================
+
+    window.dispatchEvent(
+      new Event("storage")
+    );
+
+    // =================================================
+    // SUCCESS
+    // =================================================
+
+    alert("Login successful!");
+
+    // =================================================
+    // GO TO PROFILE
+    // =================================================
+
+    navigate(
+      "/profile",
+      {
+        replace: true,
+      }
+    );
+
+  } catch (error) {
+    console.error(
+      "❌ LOGIN ERROR:",
+      error
+    );
+
+    alert(
+      "Unable to connect to server. Please make sure the backend is running."
+    );
+
+  } finally {
+    setLoading(false);
+  }
 };
 
-/* HANDLE LOGIN */
+  // =====================================================
+  // UI
+  // =====================================================
 
-const handleLogin = (e) => {
+  return (
 
-e.preventDefault();
+    <div className="login-page">
 
-/* VALIDATION */
+      <div className="login-card">
 
-if (!form.email || !form.password) {
-alert("Please fill all fields");
-return;
-}
+        <h2>
+          Login
+        </h2>
 
-/* USER DATA */
+        <form
+          onSubmit={handleLogin}
+        >
 
-const userData = {
-email: form.email
-};
+          {/* EMAIL */}
 
-/* SAVE USER */
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            autoComplete="email"
+            required
+            disabled={loading}
+          />
 
-loginUser(userData);
+          {/* PASSWORD */}
 
-/* STORE USER */
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            autoComplete="current-password"
+            required
+            disabled={loading}
+          />
 
-localStorage.setItem("user", JSON.stringify(userData));
+          {/* LOGIN BUTTON */}
 
-/* TRIGGER NAVBAR UPDATE */
+          <button
+            type="submit"
+            disabled={loading}
+          >
 
-window.dispatchEvent(new Event("storage"));
+            {loading
+              ? "Logging in..."
+              : "Login"}
 
-setIsLoggedIn(true);
+          </button>
 
-/* REDIRECT */
+        </form>
 
-navigate("/profile");
+        {/* REGISTER */}
 
-};
+        <p>
 
-return (
+          Don't have an account?
 
-<div className="login-page">
+          <Link to="/register">
+            {" "}Register
+          </Link>
 
-<div className="login-card">
+        </p>
 
-<h2>Login</h2>
+      </div>
 
-<form onSubmit={handleLogin}>
+    </div>
 
-<input
-type="email"
-name="email"
-placeholder="Email"
-value={form.email}
-onChange={handleChange}
-required
-/>
-
-<input
-type="password"
-name="password"
-placeholder="Password"
-value={form.password}
-onChange={handleChange}
-required
-/>
-
-<button type="submit">
-Login
-</button>
-
-</form>
-
-<p>
-Don't have an account?
-<Link to="/register"> Register</Link>
-</p>
-
-</div>
-
-</div>
-
-);
-
+  );
 }
 
 export default Login;

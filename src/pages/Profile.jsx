@@ -1,480 +1,258 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "./Profile.css";
-import soap from "../assets/soap.jpg";
-import earning from "../assets/accessory.jpg";
 
-function ProfileDashboard() {
+function Profile() {
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // =====================================================
+  // LOAD USER
+  // =====================================================
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const savedUser = localStorage.getItem("user");
+
+    if (!token) {
+      navigate("/login", { replace: true });
+      return;
+    }
+
+    if (savedUser) {
+      try {
+        const parsedUser = JSON.parse(savedUser);
+        setUser(parsedUser);
+      } catch (error) {
+        console.error("Error parsing saved user:", error);
+
+        localStorage.removeItem("user");
+
+        navigate("/login", { replace: true });
+        return;
+      }
+    } else {
+      console.error("No user found in localStorage");
+
+      navigate("/login", { replace: true });
+      return;
+    }
+
+    setLoading(false);
+  }, [navigate]);
+
+  // =====================================================
+  // LOADING
+  // =====================================================
+
+  if (loading) {
+    return (
+      <div className="profile-page">
+        <div className="profile-card">
+          <h2>Loading Profile...</h2>
+        </div>
+      </div>
+    );
+  }
+
+  // =====================================================
+  // NO USER
+  // =====================================================
+
+  if (!user) {
+    return null;
+  }
+
+  // =====================================================
+  // LOGOUT
+  // =====================================================
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("profile");
+
+    window.dispatchEvent(
+      new Event("authChange")
+    );
+
+    navigate("/", {
+      replace: true
+    });
+  };
 
-const [active, setActive] = useState("profile");
-const [editMode, setEditMode] = useState(false);
+  // =====================================================
+  // PROFILE PHOTO
+  // =====================================================
 
-const [profile, setProfile] = useState({
-name: "Keerthana",
-email: "keerthana@gmail.com",
-phone: "+91 9876543210"
-});
+  const profilePhoto =
+    user.photo ||
+    user.profilePhoto ||
+    user.avatar ||
+    user.image ||
+    null;
 
-const [wishlistItems, setWishlistItems] = useState([]);
+  // =====================================================
+  // PROFILE INITIAL
+  // =====================================================
 
-const [addresses, setAddresses] = useState([]);
-const [editingIndex, setEditingIndex] = useState(null);
-const [showForm, setShowForm] = useState(false);
+  const getInitial = () => {
+    const name =
+      user.name ||
+      user.email ||
+      "U";
 
-const [addressForm, setAddressForm] = useState({
-name: "",
-street: "",
-city: "",
-state: "",
-mobile: ""
-});
+    return name
+      .charAt(0)
+      .toUpperCase();
+  };
 
-/* LOGOUT */
+  // =====================================================
+  // UI
+  // =====================================================
 
-const handleLogout = () => {
+  return (
+    <div className="profile-page">
 
-localStorage.removeItem("profile");
-localStorage.removeItem("addresses");
-localStorage.removeItem("favorites");
-localStorage.removeItem("user");
+      <div className="profile-card">
 
-alert("Logged out successfully");
+        {/* =================================================
+            TITLE
+        ================================================= */}
 
-window.location.href = "/";
+        <h1>My Profile</h1>
 
-};
+        {/* =================================================
+            PROFILE PHOTO
+        ================================================= */}
 
-/* LOAD ADDRESSES */
+        <div className="profile-photo">
 
-useEffect(() => {
-const saved = JSON.parse(localStorage.getItem("addresses")) || [];
-setAddresses(saved);
-}, []);
+          {profilePhoto ? (
+            <img
+              src={profilePhoto}
+              alt="Profile"
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+              }}
+            />
+          ) : (
+            <div className="profile-avatar">
+              {getInitial()}
+            </div>
+          )}
 
-/* LOAD PROFILE */
+        </div>
 
-useEffect(() => {
-const savedProfile = JSON.parse(localStorage.getItem("profile"));
-if (savedProfile) {
-setProfile(savedProfile);
-}
-}, []);
+        {/* =================================================
+            NAME
+        ================================================= */}
 
-/* LOAD WISHLIST */
+        <div className="profile-field">
 
-useEffect(() => {
+          <label>Name</label>
 
-const favs = JSON.parse(localStorage.getItem("favorites")) || [];
+          <p>
+            {user.name || "Not available"}
+          </p>
 
-const products = [
-{ id: 1, name: "Rose Soap", price: 299, image: soap },
-{ id: 2, name: "Fashion Earrings", price: 199, image: earning }
-];
+        </div>
 
-const filtered = products.filter(p => favs.includes(p.id));
+        {/* =================================================
+            EMAIL
+        ================================================= */}
 
-setWishlistItems(filtered);
+        <div className="profile-field">
 
-}, []);
+          <label>Email</label>
 
-/* PROFILE CHANGE */
+          <p>
+            {user.email || "Not available"}
+          </p>
 
-const handleChange = (e) => {
-setProfile({
-...profile,
-[e.target.name]: e.target.value
-});
-};
+        </div>
 
-const saveProfile = () => {
-localStorage.setItem("profile", JSON.stringify(profile));
-setEditMode(false);
-};
+        {/* =================================================
+            PHONE
+        ================================================= */}
 
-/* WISHLIST */
+        <div className="profile-field">
 
-const removeFromWishlist = (id) => {
+          <label>Phone</label>
 
-let favs = JSON.parse(localStorage.getItem("favorites")) || [];
+          <p>
+            {user.phone || "Not available"}
+          </p>
 
-favs = favs.filter(item => item !== id);
+        </div>
 
-localStorage.setItem("favorites", JSON.stringify(favs));
+        {/* =================================================
+            USER ID
+        ================================================= */}
 
-setWishlistItems(wishlistItems.filter(item => item.id !== id));
+        <div className="profile-field">
 
-};
+          <label>User ID</label>
 
-/* ADDRESS CHANGE */
+          <p>
+            {user._id ||
+              user.id ||
+              "Not available"}
+          </p>
 
-const handleAddressChange = (e) => {
+        </div>
 
-setAddressForm({
-...addressForm,
-[e.target.name]: e.target.value
-});
+        {/* =================================================
+            ACTIONS
+        ================================================= */}
 
-};
+        <div className="profile-actions">
 
-const saveAddress = () => {
+          {/* EDIT PROFILE */}
 
-if(!addressForm.name || !addressForm.street || !addressForm.city || !addressForm.mobile){
-alert("Please fill all fields");
-return;
-}
+          <button
+            className="edit-profile-btn"
+            onClick={() => navigate("/edit-profile")}
+          >
+            ✏️ Edit Profile
+          </button>
 
-let updated = [...addresses];
+          {/* HOME */}
 
-if (editingIndex !== null) {
-updated[editingIndex] = addressForm;
-} else {
-updated.push(addressForm);
-}
+          <button
+            className="home-profile-btn"
+            onClick={() => navigate("/")}
+          >
+            🏠 Home
+          </button>
 
-setAddresses(updated);
-localStorage.setItem("addresses", JSON.stringify(updated));
+          {/* MY ORDERS */}
 
-setAddressForm({
-name:"",
-street:"",
-city:"",
-state:"",
-mobile:""
-});
+          <button
+            className="orders-profile-btn"
+            onClick={() => navigate("/myorders")}
+          >
+            📦 My Orders
+          </button>
 
-setEditingIndex(null);
-setShowForm(false);
+          {/* LOGOUT */}
 
-};
+          <button
+            className="logout-btn"
+            onClick={handleLogout}
+          >
+            🚪 Logout
+          </button>
 
-const editAddress = (index) => {
+        </div>
 
-setAddressForm(addresses[index]);
-setEditingIndex(index);
-setShowForm(true);
+      </div>
 
-};
-
-const deleteAddress = (index) => {
-
-const updated = addresses.filter((_, i) => i !== index);
-
-setAddresses(updated);
-
-localStorage.setItem("addresses", JSON.stringify(updated));
-
-};
-
-const cancelAddress = () => {
-
-setShowForm(false);
-setEditingIndex(null);
-
-setAddressForm({
-name:"",
-street:"",
-city:"",
-state:"",
-mobile:""
-});
-
-};
-
-const openAddAddress = () => {
-
-setAddressForm({
-name:"",
-street:"",
-city:"",
-state:"",
-mobile:""
-});
-
-setEditingIndex(null);
-setShowForm(true);
-
-};
-
-return (
-
-<div className="profile-dashboard">
-
-{/* SIDEBAR */}
-
-<div className="profile-sidebar">
-
-<h3>My Account</h3>
-
-<ul>
-
-<li
-className={active === "profile" ? "active" : ""}
-onClick={() => setActive("profile")}
->
-Profile
-</li>
-
-<li
-className={active === "orders" ? "active" : ""}
-onClick={() => setActive("orders")}
->
-Orders
-</li>
-
-<li
-className={active === "address" ? "active" : ""}
-onClick={() => setActive("address")}
->
-Saved Addresses
-</li>
-
-<li
-className={active === "wishlist" ? "active" : ""}
-onClick={() => setActive("wishlist")}
->
-Wishlist
-</li>
-
-<li
-className={active === "changepassword" ? "active" : ""}
-onClick={() => setActive("changepassword")}
->
-Change Password
-</li>
-
-{/* LOGOUT */}
-
-<li
-className="logout-btn"
-onClick={handleLogout}
->
-Logout
-</li>
-
-</ul>
-
-</div>
-
-{/* CONTENT */}
-
-<div className="profile-content">
-
-{/* PROFILE */}
-
-{active === "profile" && (
-
-<div className="profile-section">
-
-<h2>Profile</h2>
-
-<div className="profile-card">
-
-<img
-src="https://i.pravatar.cc/120"
-alt="User profile"
-/>
-
-<div className="profile-info">
-
-{editMode ? (
-
-<>
-
-<input
-type="text"
-name="name"
-value={profile.name}
-onChange={handleChange}
-/>
-
-<input
-type="email"
-name="email"
-value={profile.email}
-onChange={handleChange}
-/>
-
-<input
-type="text"
-name="phone"
-value={profile.phone}
-onChange={handleChange}
-/>
-
-<div className="profile-buttons">
-
-<button onClick={saveProfile}>
-Save
-</button>
-
-<button
-className="cancel-btn"
-onClick={() => setEditMode(false)}
->
-Cancel
-</button>
-
-</div>
-
-</>
-
-) : (
-
-<>
-
-<p><strong>Name:</strong> {profile.name}</p>
-<p><strong>Email:</strong> {profile.email}</p>
-<p><strong>Phone:</strong> {profile.phone}</p>
-
-<button
-className="edit-btn"
-onClick={() => setEditMode(true)}
->
-Edit Profile
-</button>
-
-</>
-
-)}
-
-</div>
-
-</div>
-
-</div>
-
-)}
-
-{/* ORDERS */}
-
-{active === "orders" && (
-
-<div className="orders-section">
-
-<h2>My Orders</h2>
-
-<div className="order-item">
-<p>Rose Soap Gift Pack</p>
-<span>₹299</span>
-<span className="status delivered">Delivered</span>
-</div>
-
-<div className="order-item">
-<p>Women Fashion Earrings</p>
-<span>₹199</span>
-<span className="status shipped">Shipped</span>
-</div>
-
-</div>
-
-)}
-
-{/* ADDRESS */}
-
-{active === "address" && (
-
-<div className="address-section">
-
-<h2>Saved Addresses</h2>
-
-{addresses.map((addr,index)=>(
-
-<div className="address-card" key={index}>
-
-<p><strong>{addr.name}</strong></p>
-<p>{addr.street}</p>
-<p>{addr.city}, {addr.state}</p>
-<p>📞 {addr.mobile}</p>
-
-<div className="address-buttons">
-
-<button
-className="edit-btn"
-onClick={()=>editAddress(index)}
->
-Edit
-</button>
-
-<button
-className="delete-btn"
-onClick={()=>deleteAddress(index)}
->
-Delete
-</button>
-
-</div>
-
-</div>
-
-))}
-
-<button
-className="add-address-btn"
-onClick={openAddAddress}
->
-Add New Address
-</button>
-
-</div>
-
-)}
-
-{/* WISHLIST */}
-
-{active === "wishlist" && (
-
-<div className="wishlist-section">
-
-<h2>My Wishlist</h2>
-
-<div className="wishlist-grid">
-
-{wishlistItems.length === 0 ? (
-<p>No items in wishlist</p>
-) : (
-
-wishlistItems.map(item => (
-
-<div className="wishlist-card" key={item.id}>
-
-<img src={item.image} alt={item.name}/>
-
-<h4>{item.name}</h4>
-
-<p className="price">₹{item.price}</p>
-
-<div className="wishlist-buttons">
-
-<button className="add-cart-btn">
-Add to Cart
-</button>
-
-<button
-className="remove-btn"
-onClick={()=>removeFromWishlist(item.id)}
->
-Remove
-</button>
-
-</div>
-
-</div>
-
-))
-
-)}
-
-</div>
-
-</div>
-
-)}
-
-</div>
-
-</div>
-
-);
-
+    </div>
+  );
 }
 
-export default ProfileDashboard;
+export default Profile;

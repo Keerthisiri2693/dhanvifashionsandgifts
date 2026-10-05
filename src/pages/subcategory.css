@@ -1,0 +1,470 @@
+/* =====================================================
+   PAGE
+===================================================== */
+
+.subcategory-page {
+  min-height: 100vh;
+  background: #fff8fa;
+  color: #171717;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.subcategory-hero {
+  padding: 70px 6% 55px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255, 77, 116, 0.12),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #fff5f7,
+      #ffffff
+    );
+  border-bottom: 1px solid #f5dce3;
+}
+
+.subcategory-hero-content {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+.subcategory-eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #ff3f68;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+}
+
+.subcategory-hero h1 {
+  margin: 0;
+  font-size: clamp(36px, 5vw, 58px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.subcategory-hero p {
+  max-width: 650px;
+  margin: 20px auto 0;
+  color: #737373;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.subcategory-divider {
+  width: 55px;
+  height: 3px;
+  margin: 28px auto 15px;
+  border-radius: 10px;
+  background: #ff3f68;
+}
+
+.subcategory-count {
+  color: #777;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.subcategory-section {
+  max-width: 1400px;
+  margin: auto;
+  padding: 55px 30px 80px;
+}
+
+.subcategory-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.section-label {
+  color: #ff3f68;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.subcategory-section-header h2 {
+  margin: 8px 0 0;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.subcategory-section-header p {
+  margin: 0;
+  max-width: 400px;
+  color: #777;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.subcategory-container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.subcategory-card {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  background: #ffffff;
+  border: 1px solid #f2dfe4;
+  border-radius: 20px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.subcategory-card:hover {
+  transform: translateY(-7px);
+  border-color: #ffc3d0;
+  box-shadow: 0 18px 45px rgba(255, 63, 104, 0.14);
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.subcategory-image {
+  position: relative;
+  height: 260px;
+  margin: 12px;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #f8e9ed;
+}
+
+.subcategory-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.subcategory-card:hover
+.subcategory-image img {
+  transform: scale(1.07);
+}
+
+
+/* =====================================================
+   IMAGE OVERLAY
+===================================================== */
+
+.subcategory-image-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 20px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.48),
+    transparent 55%
+  );
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.subcategory-card:hover
+.subcategory-image-overlay {
+  opacity: 1;
+}
+
+.subcategory-image-overlay span {
+  padding: 10px 18px;
+  border-radius: 30px;
+  background: #ff3f68;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   NUMBER
+===================================================== */
+
+.subcategory-number {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+
+  color: #ff3f68;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.subcategory-content {
+  padding: 8px 20px 22px;
+}
+
+.subcategory-small-title {
+  color: #ff3f68;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.subcategory-content h3 {
+  margin: 7px 0 17px;
+  font-size: 20px;
+  font-weight: 750;
+}
+
+.subcategory-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 14px;
+
+  border-top: 1px solid #f3e5e8;
+
+  color: #777;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.arrow {
+  color: #ff3f68;
+  font-size: 18px;
+  transition: transform 0.25s ease;
+}
+
+.subcategory-card:hover .arrow {
+  transform: translateX(5px);
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.subcategory-loading {
+  min-height: 60vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  color: #777;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+
+  border: 3px solid #ffd9e1;
+  border-top-color: #ff3f68;
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.subcategory-error {
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 40px;
+
+  text-align: center;
+
+  background: white;
+  border: 1px solid #f1dce1;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.subcategory-error h2 {
+  margin-top: 0;
+}
+
+.subcategory-error p {
+  color: #777;
+}
+
+.retry-btn {
+  margin-top: 15px;
+  padding: 11px 22px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #ff3f68;
+  color: white;
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.retry-btn:hover {
+  background: #e92e58;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.subcategory-empty {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 60px 30px;
+
+  text-align: center;
+
+  background: white;
+  border: 1px solid #f1dce1;
+  border-radius: 22px;
+}
+
+.empty-icon {
+  font-size: 45px;
+  margin-bottom: 15px;
+}
+
+.subcategory-empty h2 {
+  margin: 0 0 10px;
+}
+
+.subcategory-empty p {
+  margin: 0;
+  color: #777;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+
+  .subcategory-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .subcategory-hero {
+    padding: 50px 20px 40px;
+  }
+
+  .subcategory-section {
+    padding: 40px 16px 60px;
+  }
+
+  .subcategory-section-header {
+    display: block;
+  }
+
+  .subcategory-section-header p {
+    margin-top: 10px;
+  }
+
+  .subcategory-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .subcategory-image {
+    height: 190px;
+  }
+
+  .subcategory-content {
+    padding: 6px 14px 17px;
+  }
+
+  .subcategory-content h3 {
+    font-size: 16px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+  .subcategory-container {
+    grid-template-columns: 1fr;
+  }
+
+  .subcategory-image {
+    height: 240px;
+  }
+
+}

@@ -1,92 +1,550 @@
-.product-card{
+/* =========================================================
+   GLOBAL PRODUCT CARD BOX SIZING
+========================================================= */
+
+.product-card,
+.product-card * {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PRODUCT CARD
+========================================================= */
+
+.product-card {
   position: relative;
-  background: white;
-  border-radius: 14px;
-  padding: 16px;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  transition: 0.3s;
+
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+
+  border: 1px solid #f0e6e8;
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.11);
+}
+
+
+/* =========================================================
+   IMAGE WRAPPER
+========================================================= */
+
+.product-image-wrapper {
+  position: relative;
+
+  width: 100%;
+  height: 260px;
+
+  background: #fff7f8;
+
   overflow: hidden;
 }
 
-.product-card:hover{
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-}
 
-/* Product Image */
+/* =========================================================
+   PRODUCT IMAGE
+========================================================= */
 
-.product-card img{
+.product-image {
+  display: block;
+
   width: 100%;
-  height: 200px;
+  height: 100%;
+
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
+
+  transition: transform 0.4s ease;
 }
 
-/* Product Name */
-
-.product-card h3{
-  font-size: 16px;
-  margin: 8px 0;
-  font-weight: 600;
+.product-card:hover .product-image {
+  transform: scale(1.05);
 }
 
-/* Price */
 
-.product-card p{
-  font-size: 18px;
-  font-weight: bold;
-  color: #ff4d6d;
-  margin-bottom: 12px;
-}
+/* =========================================================
+   FAVORITE BUTTON
+========================================================= */
 
-/* Add to Cart Button */
-
-.product-card button{
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  background: #ff4d6d;
-  color: white;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.product-card button:hover{
-  background: #e63b5a;
-}
-
-/* Favorite Heart */
-
-.favorite{
+.favorite-button {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: 0.3s;
 
-  background: white;
-  padding: 6px;
-  border-radius: 50%;
+  top: 14px;
+  right: 14px;
+
+  z-index: 5;
+
+  width: 42px;
+  height: 42px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  color: #555555;
+
+  font-size: 23px;
+
+  cursor: pointer;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease,
+    background 0.2s ease;
 }
 
-/* when product is favorite */
-.favorite.active{
-  color: red;
-  transform: scale(1.15);
+.favorite-button:hover {
+  transform: scale(1.08);
+
+  background: #ffffff;
 }
 
-/* hover effect */
-.favorite:hover{
-  transform: scale(1.15);
+.favorite-button.active {
+  color: #e91e63;
+}
+
+
+/* =========================================================
+   DISCOUNT BADGE
+========================================================= */
+
+.discount-badge {
+  position: absolute;
+
+  top: 16px;
+  left: 16px;
+
+  z-index: 4;
+
+  padding: 6px 10px;
+
+  border-radius: 8px;
+
+  background: #e91e63;
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   OUT OF STOCK OVERLAY
+========================================================= */
+
+.out-of-stock-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.out-of-stock-overlay span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 9px 16px;
+
+  border-radius: 8px;
+
+  background: #222222;
+
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   PRODUCT CONTENT
+========================================================= */
+
+.product-content {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+
+  padding: 18px;
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.product-category {
+  display: inline-flex;
+  align-self: flex-start;
+
+  width: fit-content;
+
+  padding: 5px 9px;
+
+  margin-bottom: 6px;
+
+  border-radius: 6px;
+
+  background: #fff0f4;
+
+  color: #d81b60;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   SUBCATEGORY
+========================================================= */
+
+.product-subcategory {
+  margin: 0 0 7px;
+
+  color: #888888;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+
+  text-transform: capitalize;
+}
+
+
+/* =========================================================
+   PRODUCT NAME
+========================================================= */
+
+.product-name {
+  margin: 0 0 8px;
+
+  color: #202020;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  line-height: 1.35;
+
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.product-description {
+  margin: 0 0 12px;
+
+  color: #777777;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   PRICE ROW
+========================================================= */
+
+.product-price-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  margin-top: auto;
+  margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   CURRENT PRICE
+========================================================= */
+
+.product-price {
+  color: #d81b60;
+
+  font-size: 21px;
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+   ORIGINAL PRICE
+========================================================= */
+
+.product-original-price {
+  color: #999999;
+
+  font-size: 14px;
+
+  line-height: 1.2;
+
+  text-decoration: line-through;
+}
+
+
+/* =========================================================
+   STOCK TEXT
+========================================================= */
+
+.stock-text {
+  margin: 0 0 13px;
+
+  color: #198754;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  line-height: 1.4;
+}
+
+.stock-text.low-stock {
+  color: #e67e22;
+}
+
+
+/* =========================================================
+   ADD TO CART
+========================================================= */
+
+.add-cart-button {
+  width: 100%;
+  min-height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 14px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    #ff477e,
+    #e91e63
+  );
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.add-cart-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 16px rgba(233, 30, 99, 0.25);
+}
+
+.add-cart-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.add-cart-button:focus-visible {
+  outline: 3px solid rgba(233, 30, 99, 0.25);
+  outline-offset: 2px;
+}
+
+.add-cart-button.disabled,
+.add-cart-button:disabled {
+  background: #d6d6d6;
+
+  color: #777777;
+
+  cursor: not-allowed;
+
+  box-shadow: none;
+
+  transform: none;
+
+  opacity: 1;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .product-image-wrapper {
+    height: 230px;
+  }
+
+  .product-content {
+    padding: 15px;
+  }
+
+  .product-name {
+    font-size: 17px;
+  }
+
+  .product-price {
+    font-size: 20px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .product-card {
+    border-radius: 14px;
+  }
+
+  .product-image-wrapper {
+    height: 210px;
+  }
+
+  .product-content {
+    padding: 14px;
+  }
+
+  .product-name {
+    font-size: 16px;
+  }
+
+  .product-description {
+    font-size: 12px;
+  }
+
+  .product-price {
+    font-size: 18px;
+  }
+
+  .product-original-price {
+    font-size: 13px;
+  }
+
+  .favorite-button {
+    top: 10px;
+    right: 10px;
+
+    width: 38px;
+    height: 38px;
+
+    font-size: 20px;
+  }
+
+  .discount-badge {
+    top: 10px;
+    left: 10px;
+
+    padding: 5px 8px;
+
+    font-size: 11px;
+  }
+
+  .add-cart-button {
+    min-height: 42px;
+
+    font-size: 13px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .product-image-wrapper {
+    height: 180px;
+  }
+
+  .product-content {
+    padding: 12px;
+  }
+
+  .product-name {
+    font-size: 15px;
+  }
+
+  .product-price {
+    font-size: 17px;
+  }
+
+  .favorite-button {
+    width: 35px;
+    height: 35px;
+
+    font-size: 18px;
+  }
 }
